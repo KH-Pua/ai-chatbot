@@ -3,7 +3,7 @@
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
 import { useEffect, useRef, useState } from 'react';
-import { Send, Loader2, User, Bot, AlertCircle } from 'lucide-react';
+import { Send, Loader2, User, Bot, AlertCircle, ArrowLeft } from 'lucide-react';
 import { suggestedQuestions } from '@/lib/ai/prompts';
 
 export function ChatInterface() {
@@ -44,6 +44,11 @@ export function ChatInterface() {
 
   const handleSuggestedQuestion = (question: string) => {
     sendMessage({ text: question });
+  };
+
+  const handleBackToEmail = () => {
+    setShowEmailPrompt(true);
+    setCustomerEmail('');
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -109,6 +114,14 @@ export function ChatInterface() {
       <div className="bg-white/80 backdrop-blur-xl border-b border-slate-200/50 px-6 py-5 shadow-sm">
         <div className="flex items-center justify-between max-w-5xl mx-auto">
           <div className="flex items-center gap-4">
+            <button
+              onClick={handleBackToEmail}
+              className="group flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-slate-100 transition-colors duration-200"
+              title="Change email"
+            >
+              <ArrowLeft className="w-5 h-5 text-slate-500 group-hover:text-emerald-600 transition-colors" />
+              <span className="text-sm text-slate-600 group-hover:text-emerald-700 font-medium hidden sm:inline">Back</span>
+            </button>
             <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl flex items-center justify-center shadow-lg transform hover:rotate-12 transition-transform duration-300">
               <Bot className="w-7 h-7 text-white" />
             </div>
